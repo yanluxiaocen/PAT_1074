@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main() {
+    string s, a, b;
+    cin >> s >> a >> b;
+
+    int len = max({ s.length(),a.length(),b.length() });
+    while (s.length() < len) s = '0' + s;
+    while (a.length() < len) a = '0' + a;
+    while (b.length() < len) b = '0' + b;
+
+    string ex = "";
+    int n = 0;
+    for (int i = len - 1; i >= 0; i--)
+    {
+        int base = s[i] - '0';
+        if (base == 0) base = 10;
+
+        int sum = (a[i] - '0') + (b[i] - '0') + n;
+        n = sum / base;
+        int out = sum % base;
+
+        ex = char(out + '0') + ex;
+    }
+
+    if (n != 0)
+        ex = char(n + '0') + ex;
+
+    int k = 0;
+    while (k < ex.length() - 1 && ex[k] == '0') k++;
+    cout << ex.substr(k) << endl;
+
+    return 0;
+}
